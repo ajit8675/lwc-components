@@ -1,0 +1,56 @@
+<!-- sldsValidatorIgnore -->
+<template>
+    <lightning-card>
+        <div class="slds-grid slds-wrap">
+            <div class="slds-size_1-of-1 slds-var-p-around_small">
+                <lightning-input label="User Id or Email" value={userInput} onchange={userInputChangeHandler} required></lightning-input>
+            </div>
+            <div class="slds-size_1-of-1 slds-var-p-around_small">
+                <lightning-button variant="brand" label="Submit" onclick={getAvailableAccess}></lightning-button>
+            </div>
+        </div>
+        <template if:true={responseReceived}>
+            <div class="slds-size_1-of-1 slds-var-p-around_small">
+                <table class="slds-table slds-table_bordered">
+                    <thead>
+                        <tr class="slds-line-height_reset">
+                            <th class="" scope="col">
+                                <div class="slds-truncate" title="Availbale Access">Availbale access based on similar user profile</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="slds-hint-parent">
+                            <td>
+                                <div title="Permission Sets">
+                                    Permission Sets:
+                                    <ul>
+                                        <template for:each={accessObject.permissionSets} for:item="perm">
+                                            <li key={perm}>
+                                                <lightning-formatted-text value={perm}></lightning-formatted-text>
+                                            </li>
+                                        </template>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="slds-hint-parent">
+                            <td>
+                                <div title="Public Groups">
+                                    Public Groups:
+                                    <ul>
+                                        <template for:each={accessObject.publicGroups} for:item="pg">
+                                            <li key={pg}>
+                                                <lightning-formatted-text value={pg}></lightning-formatted-text>
+                                            </li>
+                                        </template>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </template>
+    </lightning-card>
+</template>
